@@ -3,7 +3,7 @@
 #
 $tenantId = "yourtenant.onmicrosoft.com" # or GUID "01234567-89AB-CDEF-0123-456789ABCDEF"
 $clientId = "FEDCBA98-7654-3210-FEDC-BA9876543210"
-$client_secret = "M9Q1lk5+fFkrI6Cg9+Tynv1B87JJVCIEju2568+wZW8="
+$clientSecret = "M9Q1lk5+fFkrI6Cg9+Tynv1B87JJVCIEju2568+wZW8="
 
 $resource = "https://graph.microsoft.com"
 $outputSigninLogFile = "signin.csv"
