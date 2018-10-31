@@ -48,3 +48,5 @@ Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.
 GET https://graph.microsoft.com/beta/auditLogs/directoryAudits HTTP/1.1
 Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.FDlzA1xpic{省略}Nj_6yECdIw
 ```
+
+本スクリプトでは、各ログの採取に長時間 (1 時間) を要する場合でも、トークンが失効しないよう、適宜失効が近づいた場合はトークンを再取得するよう構成しています。
