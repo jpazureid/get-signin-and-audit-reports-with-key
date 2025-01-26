@@ -1,4 +1,5 @@
 # Get sign-in activity and audit reports with key
+
 Shows how to download sign-in activity log and audit log on Azure AD using key with PowerShell
 
 PowerShell スクリプトで従来のキー (client_secret) を利用して Azure AD のサインイン アクティビティ レポートおよび監査ログを csv 形式で取得する方法を紹介します。
@@ -7,14 +8,25 @@ PowerShell スクリプトで従来のキー (client_secret) を利用して Azu
 
 ## アプリ ID とキーの準備
 
-以下の手順で、Azure AD 上にアプリケーションを準備します。まず、以下のドキュメントに記載された手順に従って、アプリケーションを登録し、"構成設定を収集する" に従ってドメイン名とクライアント ID を取得します。サインインログを一覧で取得するには、Azure AD Premium P1 ライセンス以上も必要です。
+以下の手順で、Entra ID 上にアプリケーションを準備します。なお、Azure AD Premium P1 ライセンス以上も必要です。
 
-Azure AD Reporting API にアクセスするための前提条件  
-https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-reporting-api-prerequisites-azure-portal
+1. Azure ポータルに、全体管理者の権限を持つアカウントでサインインします。
+2. Microsoft Entra ID のブレードを選択します。
+3. [アプリの登録] を選択します。
+4. [+ 新規登録] を選択します。
+5. 表示名と、アカウントの種類を入力して、[登録] を選択します。
+6. アプリが作成されたら、ドメイン名とクライアント ID を控えます。
+7. アプリが作成されたら [API のアクセス許可] を選択します。
+8. [API のアクセス許可] のブレードで、[+ アクセス許可の追加] を選択します。
+9. [Microsoft Graph] を選択し[アプリケーションの許可] を選択します。
+10. AuditLog.Read.All と Directory.Read.All にチェックをつけます。
+11. [アクセス許可の追加] を選択します。
+12. [{テナント名} に管理者の同意を与えます] をクリックし [はい] を選択します。
+13. [証明書とシークレット] のブレードを選択し、[クライアント シークレット] のタブから [+ 新しいクライアント シークレット] を選択します。
 
 以下のような画面でキーが表示されますので、文字列を控えておきます。
 
-![キーのアップロード画面](img/getkey.png)
+![キーの画面](img/getkey.png)
 
 続いて、GetSigninAndAuditReportsWithKey.ps1 ファイルを開き、以下の 3 行を確認した結果に合わせて変更します。$client_secret は上記例の値にしていますので、$tenantId と $clientId を適宜変更ください。
 
@@ -28,7 +40,7 @@ $clientSecret = "M9Q1lk5+fFkrI6Cg9+Tynv1B87JJVCIEju2568+wZW8="
 
 ## 認証処理の内部動作
 
-キーを使用した認証処理では、Azure AD の token エンドポイントに対して client_credentials grant flow でアクセストークンを取得します。
+キーを使用した認証処理では、Azure AD の token エンドポイントに対して Client credentials grant flow でアクセストークンを取得します。
 
 ```
 POST https://login.microsoftonline.com/yourtenant.onmicrosoft.com/oauth2/token
